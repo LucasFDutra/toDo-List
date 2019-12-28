@@ -1,0 +1,31 @@
+.container {
+  width: 100%;
+  height: 350px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-top: 130px;
+  border-radius: 5px;
+  background: #373a4b;
+  padding-top: 0;
+}
+
+.container button {
+  width: 90%;
+  height: 50px;
+  max-width: 300px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  margin-bottom: 0px;
+}
+
+.logo {
+  margin-top: 0px;
+  padding-top: 0px;
+  height: 120px;
+}
