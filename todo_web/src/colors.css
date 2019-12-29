@@ -1,9 +1,25 @@
-body {
-  white-space: pre;
-  font-family: monospace;
-  font-size: 14px;
-  background: #282a36;
-  color: #f8f8f2;
+.backgroundForte {
+  color: #282a36;
+}
+
+.backgroundFraco {
+  color: #373a4b;
+}
+
+.fontsColors {
+  color: #f5f5f5;
+}
+
+.buttonsNormal {
+  color: #008ABC;
+}
+
+.buttonsMouse {
+  color: #61dbf6b9;
+}
+
+.shadows {
+  box-shadow: #111;
 }
 
 a:link,

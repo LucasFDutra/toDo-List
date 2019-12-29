@@ -8,9 +8,6 @@ const Card = () => (
     <Task />
     <Task />
     <Task />
-    <Task />
-    <Task />
-
   </div>
 );
 

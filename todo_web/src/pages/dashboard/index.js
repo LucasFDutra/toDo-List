@@ -11,6 +11,8 @@ const Dashboard = () => (
     </div>
     <div className='board'>
       <Card />
+      <Card />
+      <Card />
     </div>
   </>
 );
