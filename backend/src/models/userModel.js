@@ -5,7 +5,7 @@ var cardSchema = new Schema(
   {
     label: String,
     title: String,
-    task: [String]
+    task: [[String, Boolean]]
   }
 )
 

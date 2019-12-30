@@ -16,7 +16,6 @@ module.exports = {
 
     if (!newUser) {
       newUser = await userModel.create(req.body);
-      console.log('aqui');
     }
 
     return res.json(newUser);
