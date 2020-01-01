@@ -13,6 +13,23 @@ const Dashboard = () => (
       <Card />
       <Card />
       <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+
+
     </div>
   </>
 );
