@@ -22,7 +22,7 @@ const Main = ({ history }) => {
         window.alert('Incorrect password!');
       } else if (response.data === 0) {
         localStorage.setItem('password', password);
-        history.push(`./dashboard/${username}`);
+        history.push(`./${username}`);
       }
     } else {
       window.alert('Incomplete data!');
@@ -39,7 +39,7 @@ const Main = ({ history }) => {
       if (response.data === 402) {
         window.alert('Existing User!');
       } else {
-        history.push(`./dashboard/${username}`);
+        history.push(`./${username}`);
       }
     } else {
       window.alert('Incomplete data!');
