@@ -3,9 +3,9 @@ import api from '../../services/api';
 import Card from '../../components/cards/index';
 import Menu from '../../components/menu/index';
 import NewCard from '../../components/newCard/index'
-import './styles.css';
 import menuIcon from '../../assets/menu.svg';
 import Logo from '../../assets/logo.svg';
+import './styles.css';
 
 const Dashboard = ({ match, history }) => {
   const [cards, setCards] = useState([]);
@@ -26,6 +26,13 @@ const Dashboard = ({ match, history }) => {
     setCards(response.data.cards);
   };
 
+  const pressLogout = () => {
+    if (window.confirm('Do you really want to leave?')){
+      localStorage.removeItem('password');
+      history.push('./')
+    }
+  }
+
   return (
     <>
       <div className='header'>
@@ -33,8 +40,8 @@ const Dashboard = ({ match, history }) => {
           <img src={menuIcon} alt='menuIcon' />
         </button>
         <img src={Logo} alt='Muly ToDo List' className='logo' />
-        <button className='refrash'>Refresh</button>
-        <button className='logout'>Logout</button>
+        <button className='refrash' onClick={() => {loadCards(match.params.username, localStorage.getItem('password'))}}>Refresh</button>
+        <button className='logout' onClick={pressLogout}>Logout</button>
       </div>
       <NewCard />
       <div className='dashboard'>

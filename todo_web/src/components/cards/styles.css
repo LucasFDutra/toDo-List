@@ -24,11 +24,12 @@
 
 .cardLabel {
   margin: 20px auto 0 10px;
-  padding: 8px;
+  padding: 5px;
   border: 1px solid #f5f5f5;
   border-radius: 5px;
   color: #f5f5f5;
   font-weight: bold;
+  font-size: 11px
 }
 
 .cardLabel:hover {
