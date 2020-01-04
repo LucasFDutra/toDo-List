@@ -12,6 +12,21 @@
   justify-content: space-between;
 }
 
+.menuIcon {
+  width: 50px;
+  height: 50px;
+  margin-left: 30px;
+  background: transparent;
+  border-radius: 50px;
+}
+
+.menuIcon > img {
+  width: 40px;
+}
+
+.menuIcon:hover{
+  background: transparent;
+}
 
 .logo {
   width: 130px;
@@ -39,37 +54,9 @@
   margin: auto;
 }
 
-.newCard {
-  margin: auto auto 10px auto;
-  padding: 5px;
-  width: 30%;
+.dashboard {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: stretch;
   align-items: center;
-  justify-content: center;
-  border: 1px solid #f5f5f5;
-  box-shadow: 1px 1px 2px #ddd;
-  border-radius: 15px;
-}
-
-.newCard > input {
-  width: 100%;
-  background: transparent;
-  border: transparent;
-}
-
-.menuIcon {
-  width: 50px;
-  height: 50px;
-  margin-left: 30px;
-  background: transparent;
-  border-radius: 50px;
-}
-
-.menuIcon > img {
-  width: 40px;
-}
-
-.menuIcon:hover{
-  background: transparent;
 }

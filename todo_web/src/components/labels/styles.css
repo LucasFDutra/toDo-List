@@ -1,0 +1,20 @@
+.labelIcon {
+  width: 25px;
+  margin-right: 15px;
+}
+
+.labels {
+  width: 90%;
+  margin: 2px 15px 15px -30px;
+  padding: 5px;
+  font-size: large;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.labels:hover {
+  cursor: pointer;
+  color: #ddd;
+}

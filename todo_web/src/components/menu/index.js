@@ -1,35 +1,27 @@
-import React from 'react';
-import LabelIcon from '../../assets/labelIcon.svg';
+import React, { useState, useEffect } from 'react';
+import Label from '../labels/index';
 import './styles.css';
 
-const Menu = () => (
-  <div className='menu'>
-    <label htmlFor='label'>label</label>
-    <div className='labels'>
-      <img src={LabelIcon} alt='labelIcon' />
-      <label htmlFor='label'>label name</label>
-    </div>
-    <div className='labels'>
-      <img src={LabelIcon} alt='labelIcon' />
-      <label htmlFor='label'>label name</label>
-    </div>
-    <div className='labels'>
-      <img src={LabelIcon} alt='labelIcon' />
-      <label htmlFor='label'>label name</label>
-    </div>
-    <div className='labels'>
-      <img src={LabelIcon} alt='labelIcon' />
-      <label htmlFor='label'>label name</label>
-    </div>
-    <div className='labels'>
-      <img src={LabelIcon} alt='labelIcon' />
-      <label htmlFor='label'>label name</label>
-    </div>
-    <div className='labels'>
-      <img src={LabelIcon} alt='labelIcon' />
-      <label htmlFor='label'>label name</label>
-    </div>
-  </div>
-);
+const Menu = (cards) => {
+  const [cardsLabels, setCardLabels] = useState([]);
 
+  useEffect(()=>{
+    let arrayLabels = []
+    cards.data.map((card) => (
+      arrayLabels = [...arrayLabels, card.label]
+    ))
+    setCardLabels([...new Set(arrayLabels)])
+  }, [])
+
+  return (
+    <div className='menu'>
+      <label htmlFor='label'>Labels</label>
+      {
+        cardsLabels.map((cardLabel, index) => (
+          <Label key={index} data={cardLabel}/>
+        ))
+      }
+    </div>
+  );
+  }
 export default Menu;

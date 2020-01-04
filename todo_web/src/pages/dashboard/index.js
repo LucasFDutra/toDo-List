@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Card from '../../components/cards/index';
 import Menu from '../../components/menu/index';
+import NewCard from '../../components/newCard/index'
 import './styles.css';
-import Logo from '../../assets/logo.svg';
 import menuIcon from '../../assets/menu.svg';
+import Logo from '../../assets/logo.svg';
 
 const Dashboard = ({ match, history }) => {
   const [cards, setCards] = useState([]);
+  const [menuState, setMenuState] = useState(false);
 
   useEffect(() => {
     const { username } = match.params;
     const password = localStorage.getItem('password');
-
     loadCards(username, password);
   }, []);
 
@@ -25,42 +26,32 @@ const Dashboard = ({ match, history }) => {
     setCards(response.data.cards);
   };
 
-  const addNewCard = () => {
-    console.log('add a new card');
-  };
-
   return (
     <>
       <div className='header'>
-        <button className='menuIcon'>
+        <button className='menuIcon' onClick={() => setMenuState(!menuState)}>
           <img src={menuIcon} alt='menuIcon' />
         </button>
         <img src={Logo} alt='Muly ToDo List' className='logo' />
-        <button className='refrash' onClick={() => {}}>Refresh</button>
-        <button className='logout' onClick={loadCards(match.params.username, localStorage.getItem('password'))}>Logout</button>
+        <button className='refrash'>Refresh</button>
+        <button className='logout'>Logout</button>
       </div>
-      <div className='menu'>
-        <Menu />
-      </div>
-      <div className='newCard'>
-        <input type='text' placeholder='Card Title' />
-        <input
-          type='button'
-          placeholder='Card label'
-          onClick={
-            <Card />
-        }
-        />
-      </div>
-      <div className='board'>
+      <NewCard />
+      <div className='dashboard'>
         {
-          cards.map((card) => (
-            <Card key={card._id} data={card} />
-          ))
+          menuState && (
+            <Menu data={cards} />
+            )
         }
+        <div className='board'>
+          {
+            cards.map((card) => (
+              <Card key={card._id} data={card} />
+              ))
+            }
+        </div>
       </div>
     </>
-
   );
 };
 
