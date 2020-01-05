@@ -2,13 +2,12 @@ const mongoose = require('mongoose');
 const userModel = require('../models/userModel');
 
 module.exports = {
-  async index(req, res) {
+  async loadAllUsers(req, res) {
     const users = await userModel.find();
-
     return res.json(users);
   },
 
-  async store(req, res) {
+  async createNewUser(req, res) {
     const { username } = req.body;
 
     let newUser = await userModel.findOne({ username });
@@ -22,9 +21,9 @@ module.exports = {
     return res.json(newUser);
   },
 
-  async loginConfirm(req, res) {
-    const { username } = req.params;
-    const { password } = req.headers;
+  async loginUser(req, res) {
+    const { username } = req.body;
+    const { password } = req.body;
 
     const user = await userModel.findOne({ username });
 
@@ -32,34 +31,23 @@ module.exports = {
       return res.send('400'); // user not found
     }
     if (user.password === password) {
-      return res.send('0');
+      return res.send('0'); // user authorized
     }
     return res.send('401'); // incorrect password
   },
 
-  async show(req, res) {
+  async updateUser(req, res) {
     const { username } = req.params;
-    const { password } = req.headers;
 
-    const user = await userModel.findOne({ username });
-
-    if (!user) {
-      return res.send('400'); // user not found
-    }
-    if (user.password === password) {
-      return res.json(user);
-    }
-    return res.send('401'); // incorrect password
-  },
-
-  async update(req, res) {
-    const user = await userModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const user = await userModel.findOneAndUpdate({ username }, req.body, {new: true})
 
     return res.json(user);
   },
 
-  async destroy(req, res) {
-    await userModel.findByIdAndRemove(req.params.id);
+  async deleteUser(req, res) {
+    const { username } = req.params;
+
+    await userModel.findOneAndRemove({ username });
 
     return res.send();
   },
