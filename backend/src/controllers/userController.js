@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const userModel = require('../models/userModel');
 
 module.exports = {
@@ -55,9 +54,9 @@ module.exports = {
 
     const user = await userModel.findOne({ username });
 
-    if(user){
-      if (user.password === oldPassword){
-        await userModel.findOneAndUpdate({ username }, { "password": newPassword }, {new: true});
+    if (user) {
+      if (user.password === oldPassword) {
+        await userModel.findOneAndUpdate({ username }, { password: newPassword }, { new: true });
 
         return res.send('200'); // successfully update
       }
@@ -72,7 +71,7 @@ module.exports = {
 
     const user = await userModel.findOne({ username });
 
-    if (user){
+    if (user) {
       if (user.password === password) {
         await userModel.findOneAndRemove({ username });
         return res.send('200'); // successfully removed
