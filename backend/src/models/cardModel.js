@@ -7,10 +7,6 @@ const cardSchema = new Schema(
       type: String,
       required: true
     },
-    password: {
-      type: String,
-      required: true
-    },
     label: {
       type: String,
       required: false
