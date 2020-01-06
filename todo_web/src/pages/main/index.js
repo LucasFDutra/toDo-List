@@ -9,40 +9,47 @@ const Main = ({ history }) => {
   const [password, setPassword] = useState('');
 
   const loginUser = async () => {
-    if (username !== '' && password !== '') {
-      const response = await api.get(`/user/login/${username}`, {
-        headers: {
+    const response = await api.get('/user/loginUser', {
+      headers: {
+        username,
+        password,
+      },
+    });
+    if (response.data === 200) {
+      history.push({
+        pathname: `./${username}`,
+        state: {
+          username,
           password,
         },
       });
-
-      if (response.data === 400) {
-        window.alert('User not found!');
-      } else if (response.data === 401) {
-        window.alert('Incorrect password!');
-      } else if (response.data === 0) {
-        localStorage.setItem('password', password);
-        history.push(`./${username}`);
-      }
-    } else {
-      window.alert('Incomplete data!');
+    } else if (response.data === 400) {
+      window.alert('User not found!');
+    } else if (response.data === 401) {
+      window.alert('Incorrect password!');
+    } else if (response.data === 403) {
+      window.alert('insufficient data');
     }
   };
 
   const signInUser = async () => {
-    if (username !== '' && password !== '') {
-      const response = await api.post('/user', {
-        username,
-        password,
-      });
+    const response = await api.post('/user/createNewUser', {
+      username,
+      password,
+    });
 
-      if (response.data === 402) {
-        window.alert('Existing User!');
-      } else {
-        history.push(`./${username}`);
-      }
-    } else {
-      window.alert('Incomplete data!');
+    if (response.data === 200) {
+      history.push({
+        pathname: `./${username}`,
+        state: {
+          username,
+          password,
+        },
+      });
+    } else if (response.data === 402) {
+      window.alert('Existing user!');
+    } else if (response.data === 403) {
+      window.alert('insufficient data');
     }
   };
 

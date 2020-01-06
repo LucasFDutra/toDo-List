@@ -30,8 +30,8 @@ module.exports = {
   },
 
   async loginUser(req, res) {
-    const { username } = req.body;
-    const { password } = req.body;
+    const { username } = req.headers;
+    const { password } = req.headers;
 
     if (username !== '' && password !== '') {
       const user = await userModel.findOne({ username });

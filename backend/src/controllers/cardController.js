@@ -14,14 +14,13 @@ const userValidation = async (username, password) => {
 module.exports = {
   async loadAllCards(req, res) {
     const { username } = req.params;
-    const { password } = req.body;
-    const { label } = req.body;
+    const { password } = req.headers;
+    const { label } = req.headers;
 
     const validation = await userValidation(username, password);
 
     if (validation) {
       let cards = '';
-
       if (label !== '') {
         cards = await cardModel.find({ username, label });
       } else {
