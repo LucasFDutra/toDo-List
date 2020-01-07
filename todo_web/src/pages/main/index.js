@@ -63,8 +63,8 @@ const Main = ({ history }) => {
   return (
     <>
       <img src={Background} alt='Muly ToDo List' className='main_background' />
-      <div className='main_userArea'>
-        <img src={Logo} alt='Muly ToDo List' className='main_logoUserArea' />
+      <div className='main_container'>
+        <img src={Logo} alt='Muly ToDo List' className='main_logo' />
         <input type='text' className='main_username' placeholder='Digite seu email' onChange={(event) => setMain_Username(event.target.value)} value={main_username} />
         <input type='password' className='main_password' placeholder='Digite sua senha' onChange={(event) => setMain_Password(event.target.value)} value={main_password} />
         <div className='main_buttons'>

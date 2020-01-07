@@ -7,41 +7,63 @@ import Logo from '../../assets/logo.svg';
 import LabelIcon from '../../assets/labelIcon.svg';
 import './styles.css';
 
+// variables init with dashboard_
+
 const Dashboard = ({ history }) => {
-  const [username, setUsername] = useState(history.location.state.username);
-  const [password, setPassword] = useState(history.location.state.password);
-  const [cards, setCards] = useState([]);
-  const [label, setLabel] = useState('');
-  const [menuState, setMenuState] = useState(false);
-  const [addNewCard, setAddNewCard] = useState(false);
+  const [dashboard_username, setDashboard_Username] = useState(history.location.state.username);
+  const [dashboard_password, setPassword] = useState(history.location.state.password);
+  const [dashboard_addNewCardState, setDashboard_AddNewCardState] = useState(false);
+  const [dashboard_menuState, setDashboard_MenuState] = useState(false);
+  const [dashboard_selectedLabel, setDashboard_SelectedLabel] = useState('');
+  const [dashboard_cards, setDashboard_Cards] = useState([]);
 
   useEffect(() => {
-    loadCards();
-  }, [label]);
+    dashboard_loadCards();
+  }, [dashboard_selectedLabel]);
 
-  const Label = (cardLabel) => (
+  const dashboard_loadCards = async () => {
+    const response = await api.get(`/card/loadAllCards/${dashboard_username}`, {
+      headers: {
+        password: dashboard_password,
+        label: dashboard_selectedLabel,
+      },
+    });
+    if (response.data === 404) {
+      window.alert('access denied');
+    } else {
+      setDashboard_Cards(response.data);
+    }
+  };
+
+  const DashboardLogout = () => {
+    if (window.confirm('Do you really want to leave?')) {
+      history.push('./');
+    }
+  };
+
+  const Label = (label) => (
     <div>
-      <img src={LabelIcon} alt='labelIcon' className='labelIcon' />
-      <label htmlFor='label' className='labelClass'>{cardLabel.data}</label>
+      <img src={LabelIcon} alt='labelIcon' className='dashboard_labelIcon' />
+      <label htmlFor='label'>{label.data}</label>
     </div>
   );
 
   const Menu = () => {
     let arrayLabels = [];
-    cards.map((card) => (
+    dashboard_cards.map((card) => (
       card.label !== '' ? arrayLabels = [...arrayLabels, card.label] : false
     ));
     arrayLabels = [...new Set(arrayLabels)];
 
     return (
-      <div className='menu'>
-        <div className='labelAllCards' onClick={() => { setLabel(''); }}>
+      <div className='dashboard_menu'>
+        <div className='dashboard_mainLabel' onClick={() => { setDashboard_SelectedLabel(''); }}>
           <label htmlFor='label'>Labels</label>
         </div>
         {
-          arrayLabels.map((cardLabel, index) => (
-            <div key={index} className='labels' onClick={() => { setLabel(cardLabel); }}>
-              <Label data={cardLabel} />
+          arrayLabels.map((label, index) => (
+            <div key={index} className='dashboard_labels' onClick={() => { setDashboard_SelectedLabel(label); }}>
+              <Label data={label} />
             </div>
           ))
         }
@@ -49,55 +71,50 @@ const Dashboard = ({ history }) => {
     );
   };
 
-  const loadCards = async () => {
-    const response = await api.get(`/card/loadAllCards/${username}`, {
-      headers: {
-        password,
-        label,
-      },
-    });
-    if (response.data === 404) {
-      window.alert('access denied');
-    } else {
-      setCards(response.data);
-    }
-  };
-
-  const pressLogout = () => {
-    if (window.confirm('Do you really want to leave?')) {
-      history.push('./');
-    }
-  };
-
   return (
     <>
-      <div className='header'>
-        <button className='menuIcon' onClick={() => setMenuState(!menuState)}>
+      <div className='dashboard_header'>
+        <button className='dashboard_menuIcon' onClick={() => setDashboard_MenuState(!dashboard_menuState)}>
           <img src={menuIcon} alt='menuIcon' />
         </button>
-        <img src={Logo} alt='Muly ToDo List' className='logo' />
-        <button className='refrash' onClick={() => { loadCards(); }}>Refresh</button>
-        <button className='logout' onClick={() => { pressLogout(); }}>Logout</button>
+        <img src={Logo} alt='Muly ToDo List' className='dashboard_logo' />
+        <button className='dashboard_refrash' onClick={() => { dashboard_loadCards(); }}>Refresh</button>
+        <button className='dashboard_logout' onClick={() => { DashboardLogout(); }}>Logout</button>
       </div>
-      <div className='newCard'>
-        <label type='button' className='newCardAdd' htmlFor='newCardAdd' onClick={() => setAddNewCard(!addNewCard)}>Add A Card</label>
+      <div className='dashboard_addNewCard'>
+        <label type='button' htmlFor='addNewCard' onClick={() => setDashboard_AddNewCardState(!dashboard_addNewCardState)}>Add A Card</label>
       </div>
       {
-        addNewCard && (
-          <NewCard data={{ username, password, setAddNewCard, loadCards }} />
+        dashboard_addNewCardState && (
+          <NewCard data={
+            {
+              "username": dashboard_username,
+              "password": dashboard_password,
+              setDashboard_AddNewCardState,
+              dashboard_loadCards,
+            }
+          }
+          />
         )
       }
 
-      <div className='dashboard'>
+      <div className='dashboard_menuContainer'>
         {
-          menuState && (
+          dashboard_menuState && (
             <Menu />
           )
         }
-        <div className='board'>
+        <div className='dashboard_cardsContainer'>
           {
-            cards.map((card) => (
-              <Card key={card._id} data={{card, username, password}} />
+            dashboard_cards.map((card) => (
+              <Card key={card._id} data={
+                {
+                  card,
+                  "username": dashboard_username,
+                  "password": dashboard_password,
+                }
+              }
+              />
             ))
             }
         </div>

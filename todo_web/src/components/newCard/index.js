@@ -2,86 +2,83 @@ import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import './styles.css';
 
+// variables init with newCard_
+
 const NewCard = ({ data }) => {
-  const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState(['', false]);
-  const [label, setLabel] = useState('');
-  const [title, setTitle] = useState('');
-  const [username, setUsername] = useState(data.username);
-  const [password, setPassword] = useState(data.password);
+  const [newCard_title, setNewCard_Title] = useState('');
+  const [newCard_tasks, setNewCard_Tasks] = useState([]);
+  const [newCard_task, setNewCard_Task] = useState(['', false]);
+  const [newCard_label, setNewCard_Label] = useState('');
 
-  const addTask = () => {
-    setTasks([...tasks, task]);
+  const newCard_taskChecked = (index) => {
+    let arrayTasks = [];
+    newCard_tasks.map((task, _index) => {
+      if (_index === index) {
+        task[1] = !task[1];
+      }
+      arrayTasks = [...arrayTasks, [task[0], task[1]]];
+    });
+    setNewCard_Tasks(arrayTasks);
+  };
 
+  const newCard_taskText = (_taskText, index) => {
+    let arrayTasks = [];
+    newCard_tasks.map((task, _index) => {
+      if (_index === index) {
+        task[0] = _taskText;
+      }
+      arrayTasks = [...arrayTasks, [task[0], task[1]]];
+    });
+    setNewCard_Tasks(arrayTasks);
+  };
+
+  const newCard_addNewTask = () => {
+    setNewCard_Tasks([...newCard_tasks, newCard_task]);
     const arrayTask = ['', false];
-
-    setTask(arrayTask);
+    setNewCard_Task(arrayTask);
   };
 
-  const taskChecked = (index) => {
-    let arrayTasks = [];
-    tasks.map((oneTask, _index) => {
-      if (_index === index) {
-        oneTask[1] = !oneTask[1];
-      }
-      arrayTasks = [...arrayTasks, [oneTask[0], oneTask[1]]];
-    });
-    setTasks(arrayTasks);
-  };
-
-  const taskText = (_taskText, index) => {
-    let arrayTasks = [];
-    tasks.map((oneTask, _index) => {
-      if (_index === index) {
-        oneTask[0] = _taskText;
-      }
-      arrayTasks = [...arrayTasks, [oneTask[0], oneTask[1]]];
-    });
-    setTasks(arrayTasks);
-  };
-
-  const addNewCard = async () => {
+  const newCard_addNewCard = async () => {
     await api.post('/card/createNewCard', {
       validationInfo: {
-        username,
-        password,
+        username: data.username,
+        password: data.password,
       },
       data: {
-        username,
-        label,
-        title,
-        tasks,
+        username: data.username,
+        label: newCard_label,
+        title: newCard_title,
+        tasks: newCard_tasks,
       },
     });
-    pressEsc();
+    newCard_exitScreen();
   };
 
-  const pressEsc = () => {
-    data.setAddNewCard(false);
-    data.loadCards();
+  const newCard_exitScreen = () => {
+    data.setDashboard_AddNewCardState(false);
+    data.dashboard_loadCards();
   };
 
   return (
-    <div tabIndex='0' className='newCardScreen' onKeyDown={(event) => (event.key === 'Escape' ? pressEsc() : null)}>
-      <div className='card'>
-        <input className='title' placeholder='Card Title' onChange={(event) => setTitle(event.target.value)} value={title} />
-
+    <div tabIndex='0' className='newCard_container' onKeyDown={(event) => (event.key === 'Escape' ? newCard_exitScreen() : null)}>
+      <div className='newCard_cardContainer'>
+        <input className='newCard_title' placeholder='Card Title' onChange={(event) => setNewCard_Title(event.target.value)} value={newCard_title} />
         {
-          tasks.map((oneTask, index) => (
-            <div className='task' key={index}>
-              <input className='taskCheck' type='checkbox' onChange={() => taskChecked(index)} checked={oneTask[1]} />
-              <input className='taskText' type='text' onChange={(event) => taskText(event.target.value, index)} value={oneTask[0]} />
+          newCard_tasks.map((task, index) => (
+            <div className='newCard_task' key={index}>
+              <input className='newCard_taskCheck' type='checkbox' onChange={() => newCard_taskChecked(index)} checked={task[1]} />
+              <input className='newCard_taskText' type='text' onChange={(event) => newCard_taskText(event.target.value, index)} value={task[0]} />
             </div>
           ))
         }
 
-        <div className='task'>
-          <input className='taskCheck' type='checkbox' onChange={() => setTask([task[0], !task[1]])} checked={task[1]} />
-          <input className='taskText' type='text' onChange={(event) => setTask([event.target.value, task[1]])} onKeyPress={(event) => (event.key === 'Enter' ? addTask() : null)} value={task[0]} />
+        <div className='newCard_task'>
+          <input className='newCard_taskCheck' type='checkbox' onChange={() => setNewCard_Task([newCard_task[0], !newCard_task[1]])} checked={newCard_task[1]} />
+          <input className='newCard_taskText' type='text' onChange={(event) => setNewCard_Task([event.target.value, newCard_task[1]])} onKeyPress={(event) => (event.key === 'Enter' ? newCard_addNewTask() : null)} value={newCard_task[0]} />
         </div>
-        <div className='footer'>
-          <input type='text' className='cardLabel' placeholder='Card Label' onChange={(event) => setLabel(event.target.value)} value={label} />
-          <button className='createNewCardButton' onClick={() => addNewCard()}>Create Card</button>
+        <div className='newCard_footer'>
+          <input type='text' className='newCard_label' placeholder='Card Label' onChange={(event) => setNewCard_Label(event.target.value)} value={newCard_label} />
+          <button className='newCard_createCardButton' onClick={() => newCard_addNewCard()}>Create Card</button>
         </div>
       </div>
     </div>

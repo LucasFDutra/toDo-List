@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-.main_userArea {
+.main_container {
   position: absolute;
   top: 130px;
   left: 50%;
@@ -21,7 +21,7 @@
   justify-content: center;
 }
 
-.main_logoUserArea {
+.main_logo {
   width: 150px;
   margin: 0 auto 15px auto;
   padding: 0;

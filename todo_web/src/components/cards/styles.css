@@ -1,4 +1,4 @@
-.card {
+.card_container {
   height: auto;
   width: 100%;
   max-width: 400px;
@@ -14,7 +14,7 @@
   float: left;
 }
 
-.title {
+.card_title {
   width: 100%;
   margin-bottom: 10px;
   padding: 2px 10px 2px 10px;
@@ -24,24 +24,7 @@
   font-size: 20px;
 }
 
-.cardLabel {
-  width: 60px;
-  margin: 20px auto 0 10px;
-  padding: 5px;
-  border: 1px solid #f5f5f5;
-  border-radius: 5px;
-  background: transparent;
-  color: #f5f5f5;
-  font-weight: bold;
-  font-size: 11px
-}
-
-.cardLabel:hover {
-  background: #282a36;
-  cursor: pointer;
-}
-
-.task {
+.card_task {
   width: 100%;
   margin: 0;
   padding: 0;
@@ -52,7 +35,14 @@
   justify-content: stretch;
 }
 
-.taskText {
+.card_taskCheck {
+  height: 20px;
+  width: 20px;
+  margin: 0 0 0 25px;
+  padding: 0;
+}
+
+.card_taskText {
   height: 30px;
   width: 400px;
   max-width: 100%;
@@ -65,19 +55,33 @@
   font-size: 16px;
 }
 
-.taskCheck {
-  height: 20px;
-  width: 20px;
-  margin: 0 0 0 25px;
-  padding: 0;
+.card_footer {
+  width: 90%;
+  margin: 20px 0 5px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.moreOneTask {
-  height: 15px;
-  width: 17px;
-  margin: 2px 20px 2px 2px;
-  padding: 0;
+.card_label {
+  width: 60px;
+  padding: 5px;
   border: 1px solid #f5f5f5;
+  border-radius: 5px;
   background: transparent;
-  font-size: 12px;
+  color: #f5f5f5;
+  font-weight: bold;
+  font-size: 11px
+}
+
+.card_label:hover {
+  background: #282a36;
+  cursor: pointer;
+}
+.card_updateCardButton {
+  border: 1px solid #f5f5f5;
+  padding: 5px;
+  background: rgb(0, 138, 188);
+  border-radius: 5px;
 }

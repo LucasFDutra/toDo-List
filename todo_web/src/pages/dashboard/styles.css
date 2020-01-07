@@ -1,4 +1,4 @@
-.header {
+.dashboard_header {
   position: -webkit-sticky;
   position: sticky;
   top: 0px;
@@ -12,7 +12,7 @@
   justify-content: space-between;
 }
 
-.menuIcon {
+.dashboard_menuIcon {
   width: 50px;
   height: 50px;
   margin-left: 30px;
@@ -20,21 +20,21 @@
   border-radius: 50px;
 }
 
-.menuIcon > img {
+.dashboard_menuIcon > img {
   width: 40px;
 }
 
-.menuIcon:hover{
+.dashboard_menuIcon:hover{
   background: transparent;
 }
 
-.logo {
+.dashboard_logo {
   width: 130px;
   margin: 0px auto 0px 0px;
   padding: -15px 0 -100px 0;
 }
 
-.logout, .refrash {
+.dashboard_refrash, .dashboard_logout{
   height: 30px;
   width: 70px;
   border: 0;
@@ -43,26 +43,14 @@
   margin: 0 30px 0 0;
 }
 
-.logout:hover, .refrash:hover{
+.dashboard_refrash:hover, .dashboard_logout:hover{
   background: transparent;
   border-bottom: 1px solid #61dbf6b9;
   color: #ddd;
 }
 
-.board {
-  width: 85%;
-  margin: auto;
-}
-
-.dashboard {
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  align-items: center;
-}
-
-.newCard {
-  margin: auto auto 10px auto;
+.dashboard_addNewCard {
+  margin: auto auto 25px auto;
   padding: 5px;
   width: 500px;
   height: 50px;
@@ -76,7 +64,7 @@
   background: #373a4b;
 }
 
-.newCardAdd {
+.dashboard_addNewCard > label {
   width: 90%;
   height: 100%;
   background: transparent;
@@ -87,19 +75,18 @@
   align-items: center;
 }
 
-.newCardAdd:hover {
+.dashboard_addNewCard>label:hover {
   cursor: text;
 }
 
-.addNewCard {
-  position: fixed;
-  top: 0px;
+.dashboard_menuContainer {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: stretch;
   align-items: center;
 }
 
-.menu{
+.dashboard_menu{
   position: -webkit-sticky;
   position: sticky;
   top: 160px;
@@ -120,7 +107,7 @@
   align-items: center;
 }
 
-.labelAllCards {
+.dashboard_mainLabel {
   width: 100%;
   margin: 20px 10px 20px 0;
   padding-bottom: 5px;
@@ -128,12 +115,7 @@
   font-size: large;
 }
 
-.labelIcon {
-  width: 25px;
-  margin-right: 15px;
-}
-
-.labels {
+.dashboard_labels {
   width: 90%;
   margin: 2px 15px 15px -30px;
   padding: 5px;
@@ -144,7 +126,17 @@
   align-items: center;
 }
 
-.labels:hover, .labelAllCards:hover {
+.dashboard_mainLabel:hover, .dashboard_labels:hover {
   cursor: pointer;
   color: #ddd;
+}
+
+.dashboard_labelIcon {
+  width: 25px;
+  margin-right: 15px;
+}
+
+.dashboard_cardsContainer {
+  width: 85%;
+  margin: auto;
 }
