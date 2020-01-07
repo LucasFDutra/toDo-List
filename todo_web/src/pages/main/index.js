@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
-import './styles.css';
+import api from '../../services/api';
 import Logo from '../../assets/logo.svg';
 import Background from '../../assets/background image.jpg';
-import api from '../../services/api';
+import './styles.css';
+
+// variables init with main_
 
 const Main = ({ history }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [main_username, setMain_Username] = useState('');
+  const [main_password, setMain_Password] = useState('');
 
-  const loginUser = async () => {
+  const main_loginUser = async () => {
     const response = await api.get('/user/loginUser', {
       headers: {
-        username,
-        password,
+        username: main_username,
+        password: main_password,
       },
     });
     if (response.data === 200) {
       history.push({
-        pathname: `./${username}`,
+        pathname: `./${main_username}`,
         state: {
-          username,
-          password,
+          username: main_username,
+          password: main_password,
         },
       });
     } else if (response.data === 400) {
@@ -32,18 +34,18 @@ const Main = ({ history }) => {
     }
   };
 
-  const signInUser = async () => {
+  const main_signInUser = async () => {
     const response = await api.post('/user/createNewUser', {
-      username,
-      password,
+      username: main_username,
+      password: main_password,
     });
 
     if (response.data === 200) {
       history.push({
-        pathname: `./${username}`,
+        pathname: `./${main_username}`,
         state: {
-          username,
-          password,
+          username: main_username,
+          password: main_password,
         },
       });
     } else if (response.data === 402) {
@@ -53,16 +55,21 @@ const Main = ({ history }) => {
     }
   };
 
+  const main_logout = () => {
+    setMain_Username('');
+    setMain_Password('');
+  };
+
   return (
     <>
-      <img src={Background} alt='Muly ToDo List' className='background' />
-      <div className='userArea'>
-        <img src={Logo} alt='Muly ToDo List' className='logoUserArea' />
-        <input type='text' className='username' placeholder='Digite seu email' onChange={(event) => setUsername(event.target.value)} />
-        <input type='password' className='password' placeholder='Digite sua senha' onChange={(event) => setPassword(event.target.value)} />
-        <div className='buttons'>
-          <button className='login' onClick={loginUser}>Login</button>
-          <button className='signIn' onClick={signInUser}>Sign In</button>
+      <img src={Background} alt='Muly ToDo List' className='main_background' />
+      <div className='main_userArea'>
+        <img src={Logo} alt='Muly ToDo List' className='main_logoUserArea' />
+        <input type='text' className='main_username' placeholder='Digite seu email' onChange={(event) => setMain_Username(event.target.value)} value={main_username} />
+        <input type='password' className='main_password' placeholder='Digite sua senha' onChange={(event) => setMain_Password(event.target.value)} value={main_password} />
+        <div className='main_buttons'>
+          <button className='main_login' onClick={() => main_loginUser()}>Login</button>
+          <button className='main_signIn' onClick={() => main_signInUser()}>Sign In</button>
         </div>
       </div>
     </>

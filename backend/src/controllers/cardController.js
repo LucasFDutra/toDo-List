@@ -35,8 +35,6 @@ module.exports = {
     const { username } = req.body.validationInfo;
     const { password } = req.body.validationInfo;
 
-    console.log(req.body);
-
     const validation = await userValidation(username, password);
 
     if (validation) {
