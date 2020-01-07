@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Card from '../../components/cards/index';
+import NewCard from '../../components/newCard/index';
 import menuIcon from '../../assets/menu.svg';
 import Logo from '../../assets/logo.svg';
 import LabelIcon from '../../assets/labelIcon.svg';
@@ -11,17 +12,12 @@ const Dashboard = ({ history }) => {
   const [password, setPassword] = useState(history.location.state.password);
   const [cards, setCards] = useState([]);
   const [label, setLabel] = useState('');
-  const [labelSelected, setLabelSelected] = useState('');
   const [menuState, setMenuState] = useState(false);
   const [addNewCard, setAddNewCard] = useState(false);
 
   useEffect(() => {
     loadCards();
-  }, []);
-
-  useEffect(() => {
-    console.log(labelSelected);
-  }, [labelSelected]);
+  }, [label]);
 
   const Label = (cardLabel) => (
     <div>
@@ -39,13 +35,13 @@ const Dashboard = ({ history }) => {
 
     return (
       <div className='menu'>
-        <div className='labelAllCards' onClick={() => { setLabelSelected(''); }}>
+        <div className='labelAllCards' onClick={() => { setLabel(''); }}>
           <label htmlFor='label'>Labels</label>
         </div>
         {
           arrayLabels.map((cardLabel, index) => (
-            <div className='labels' onClick={() => { setLabelSelected(cardLabel); }}>
-              <Label key={index} data={cardLabel} />
+            <div key={index} className='labels' onClick={() => { setLabel(cardLabel); }}>
+              <Label data={cardLabel} />
             </div>
           ))
         }
@@ -88,9 +84,7 @@ const Dashboard = ({ history }) => {
       </div>
       {
         addNewCard && (
-          <div className='addNewCard' onKeyPress={() => setAddNewCard(!addNewCard)}>
-            <Card data={{ title: 'Card Title', task: [''], label: 'none' }} />
-          </div>
+          <NewCard data={{ username, password, setAddNewCard, loadCards }} />
         )
       }
 
@@ -103,7 +97,7 @@ const Dashboard = ({ history }) => {
         <div className='board'>
           {
             cards.map((card) => (
-              <Card key={card._id} data={card} />
+              <Card key={card._id} data={{card, username, password}} />
             ))
             }
         </div>
