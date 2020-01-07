@@ -10,7 +10,6 @@ const Card = ({ data }) => {
   const [card_newTask, setCard_NewTask] = useState(['', false]);
   const [card_label, setCard_Label] = useState('');
 
-
   useEffect(() => {
     let arrayTasks = [];
     data.card.tasks.map((task) => {
@@ -67,6 +66,27 @@ const Card = ({ data }) => {
     setCard_NewTask(arrayTask);
   };
 
+  const card_deleteTask = (index) => {
+    let arrayTasks = [];
+    card_tasks.map((task, _index) => {
+      if (_index !== index) {
+        arrayTasks = [...arrayTasks, task];
+      }
+    });
+    setCard_Tasks(arrayTasks);
+  };
+
+  const card_deleteCard = async () => {
+    const { _id } = data.card;
+    await api.delete(`/card/deleteCard/${_id}`, {
+      headers: {
+        username: data.username,
+        password: data.password,
+      },
+    });
+    data.dashboard_loadCards();
+  };
+
   return (
     <div className='card_container'>
       <input className='card_title' onChange={(event) => setCard_Title(event.target.value)} value={card_title} />
@@ -75,6 +95,7 @@ const Card = ({ data }) => {
           <div className='card_task' key={index}>
             <input className='card_taskCheck' type='checkbox' onChange={() => card_taskChecked(index)} checked={task[1]} />
             <input className='card_taskText' type='text' onChange={(event) => card_taskText(event.target.value, index)} value={task[0]} />
+            <button className='card_deleteTask' onClick={() => { card_deleteTask(index); }}>x</button>
           </div>
         ))
       }
@@ -83,8 +104,9 @@ const Card = ({ data }) => {
         <input className='card_taskText' type='text' onChange={(event) => setCard_NewTask([event.target.value, card_newTask[1]])} onKeyPress={(event) => (event.key === 'Enter' ? card_addNewTask() : null)} value={card_newTask[0]} />
       </div>
       <div className='card_footer'>
-        <input type='text' className='card_label' onChange={(event) => setCard_Label(event.target.value)} value={card_label} />
+        <input type='text' className='card_label' onChange={(event) => setCard_Label(event.target.value)} value={card_label} placeholder='Card Label' />
         <button className='card_updateCardButton' onClick={() => card_updateCard()}>Update Card</button>
+        <button className='card_deleteCardButton' onClick={() => card_deleteCard()}>Delete Card</button>
       </div>
     </div>
   );

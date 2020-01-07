@@ -37,7 +37,9 @@ const Dashboard = ({ history }) => {
 
   const DashboardLogout = () => {
     if (window.confirm('Do you really want to leave?')) {
-      history.push('./');
+
+      history.go(-history.length);
+      window.location.replace("./");
     }
   };
 
@@ -112,6 +114,7 @@ const Dashboard = ({ history }) => {
                   card,
                   "username": dashboard_username,
                   "password": dashboard_password,
+                  dashboard_loadCards,
                 }
               }
               />

@@ -60,8 +60,8 @@ module.exports = {
   },
 
   async deleteCard(req, res) {
-    const { username } = req.body;
-    const { password } = req.body;
+    const { username } = req.headers;
+    const { password } = req.headers;
 
     const validation = await userValidation(username, password);
 

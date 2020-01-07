@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Logo from '../../assets/logo.svg';
 import Background from '../../assets/background image.jpg';
@@ -9,6 +9,12 @@ import './styles.css';
 const Main = ({ history }) => {
   const [main_username, setMain_Username] = useState('');
   const [main_password, setMain_Password] = useState('');
+
+  useEffect(() => {
+    // var backlen = history.length - 1;
+    // history.go(-backlen); // Return at the beginning
+    // history.replaceState({});
+  }, []);
 
   const main_loginUser = async () => {
     const response = await api.get('/user/loginUser', {
@@ -55,18 +61,13 @@ const Main = ({ history }) => {
     }
   };
 
-  const main_logout = () => {
-    setMain_Username('');
-    setMain_Password('');
-  };
-
   return (
     <>
       <img src={Background} alt='Muly ToDo List' className='main_background' />
       <div className='main_container'>
         <img src={Logo} alt='Muly ToDo List' className='main_logo' />
-        <input type='text' className='main_username' placeholder='Digite seu email' onChange={(event) => setMain_Username(event.target.value)} value={main_username} />
-        <input type='password' className='main_password' placeholder='Digite sua senha' onChange={(event) => setMain_Password(event.target.value)} value={main_password} />
+        <input type='text' className='main_username' placeholder='Digite seu email' onKeyPress={(event) => (event.key === 'Enter' ? main_loginUser() : null)} onChange={(event) => setMain_Username(event.target.value)} value={main_username} />
+        <input type='password' className='main_password' placeholder='Digite sua senha' onKeyPress={(event) => (event.key === 'Enter' ? main_loginUser() : null)} onChange={(event) => setMain_Password(event.target.value)} value={main_password} />
         <div className='main_buttons'>
           <button className='main_login' onClick={() => main_loginUser()}>Login</button>
           <button className='main_signIn' onClick={() => main_signInUser()}>Sign In</button>
