@@ -26,6 +26,7 @@
 
 .dashboard_menuIcon:hover{
   background: transparent;
+  transition: 1s;
 }
 
 .dashboard_logo {
@@ -34,19 +35,42 @@
   padding: -15px 0 -100px 0;
 }
 
-.dashboard_refrash, .dashboard_logout{
-  height: 30px;
-  width: 70px;
+.dashboard_refresh {
+  height: 40px;
+  width: 40px;
   border: 0;
-  border-bottom: 1px solid #111;
   background: transparent;
   margin: 0 30px 0 0;
 }
 
-.dashboard_refrash:hover, .dashboard_logout:hover{
+.dashboard_refresh:hover {
   background: transparent;
-  border-bottom: 1px solid #61dbf6b9;
-  color: #ddd;
+}
+
+.deshboard_refreshIcon {
+  width: 30px;
+  transition: 2s;
+}
+
+.deshboard_refreshIcon:active {
+  transition: 0s;
+  transform: rotate(-720deg);
+}
+
+.dashboard_logout{
+  height: 40px;
+  width: 40px;
+  border: 0;
+  background: transparent;
+  margin: 0 30px 0 0;
+}
+
+.dashboard_logout:hover{
+  background: transparent;
+}
+
+.dashboard_logoutIcon {
+  width: 30px;
 }
 
 .dashboard_addNewCard {

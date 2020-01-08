@@ -5,6 +5,8 @@ import NewCard from '../../components/newCard/index';
 import menuIcon from '../../assets/menu.svg';
 import Logo from '../../assets/logo.svg';
 import LabelIcon from '../../assets/labelIcon.svg';
+import RefreshIcon from '../../assets/refreshIcon.svg';
+import LogoutIcon from '../../assets/logoutIcon.svg';
 import './styles.css';
 
 // variables init with dashboard_
@@ -37,9 +39,8 @@ const Dashboard = ({ history }) => {
 
   const DashboardLogout = () => {
     if (window.confirm('Do you really want to leave?')) {
-
       history.go(-history.length);
-      window.location.replace("./");
+      window.location.replace('./');
     }
   };
 
@@ -80,8 +81,12 @@ const Dashboard = ({ history }) => {
           <img src={menuIcon} alt='menuIcon' />
         </button>
         <img src={Logo} alt='Muly ToDo List' className='dashboard_logo' />
-        <button className='dashboard_refrash' onClick={() => { dashboard_loadCards(); }}>Refresh</button>
-        <button className='dashboard_logout' onClick={() => { DashboardLogout(); }}>Logout</button>
+        <button className='dashboard_refresh' onClick={() => { dashboard_loadCards(); }}>
+          <img src={RefreshIcon} alt='refreshIcon' className='deshboard_refreshIcon' />
+        </button>
+        <button className='dashboard_logout' onClick={() => { DashboardLogout(); }}>
+          <img src={LogoutIcon} alt='logoutIcon' className='dashboard_logoutIcon' />
+        </button>
       </div>
       <div className='dashboard_addNewCard'>
         <label type='button' htmlFor='addNewCard' onClick={() => setDashboard_AddNewCardState(!dashboard_addNewCardState)}>Add A Card</label>
@@ -90,8 +95,8 @@ const Dashboard = ({ history }) => {
         dashboard_addNewCardState && (
           <NewCard data={
             {
-              "username": dashboard_username,
-              "password": dashboard_password,
+              username: dashboard_username,
+              password: dashboard_password,
               setDashboard_AddNewCardState,
               dashboard_loadCards,
             }
@@ -109,11 +114,13 @@ const Dashboard = ({ history }) => {
         <div className='dashboard_cardsContainer'>
           {
             dashboard_cards.map((card) => (
-              <Card key={card._id} data={
+              <Card
+                key={card._id}
+                data={
                 {
                   card,
-                  "username": dashboard_username,
-                  "password": dashboard_password,
+                  username: dashboard_username,
+                  password: dashboard_password,
                   dashboard_loadCards,
                 }
               }

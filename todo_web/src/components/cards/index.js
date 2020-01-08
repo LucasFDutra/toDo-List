@@ -93,7 +93,7 @@ const Card = ({ data }) => {
       {
         card_tasks.map((task, index) => (
           <div className='card_task' key={index}>
-            <input className='card_taskCheck' type='checkbox' onChange={() => card_taskChecked(index)} checked={task[1]} />
+            <input className='card_taskCheck' type='checkbox' on onChange={() => card_taskChecked(index)} checked={task[1]} />
             <input className='card_taskText' type='text' onChange={(event) => card_taskText(event.target.value, index)} value={task[0]} />
             <button className='card_deleteTask' onClick={() => { card_deleteTask(index); }}>x</button>
           </div>

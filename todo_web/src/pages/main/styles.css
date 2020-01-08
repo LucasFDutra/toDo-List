@@ -14,6 +14,7 @@
   margin: 100px auto auto -175px;
   padding: 0;
   border-radius: 5px;
+  box-shadow: 1px 1px 2px #15161d;
   background: #373a4b;
   display: flex;
   flex-direction: column;
