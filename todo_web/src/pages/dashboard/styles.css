@@ -114,11 +114,9 @@
   flex-direction: row;
   justify-content: stretch;
   align-items: center;
-  overflow-y: auto;
 }
 
 .dashboard_menu{
-  top: 160px;
   width: 300px;
   max-width: 300px;
   min-width: 200px;
