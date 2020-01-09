@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="29mm"
+   width="25mm"
    height="24mm"
-   viewBox="0 0 29 24"
+   viewBox="0 0 25 24"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.6"
-     inkscape:cx="-17.825591"
-     inkscape:cy="29.033865"
+     inkscape:cx="58.424409"
+     inkscape:cy="30.462436"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -54,18 +54,18 @@
      id="layer1"
      transform="translate(0,-273)">
     <path
-       style="fill:none;fill-opacity:0;stroke:#008abc;stroke-width:2.68805408;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 1.7147184,276.64622 H 26.14966"
+       style="fill:none;fill-opacity:0;stroke:#008abc;stroke-width:3.441;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 1.7147184,276.64622 H 23.551074"
        id="path815"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;fill-opacity:0;stroke:#008abc;stroke-width:2.68805408;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 1.7147184,284.68357 H 26.14966"
+       style="fill:none;fill-opacity:0;stroke:#008abc;stroke-width:3.441;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 1.7147184,284.68357 H 23.551074"
        id="path815-2"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;fill-opacity:0;stroke:#008abc;stroke-width:2.68805408;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 1.7147184,292.72092 H 26.14966"
+       style="fill:none;fill-opacity:0;stroke:#008abc;stroke-width:3.441;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 1.7147184,292.72092 H 23.551074"
        id="path815-1"
        inkscape:connector-curvature="0" />
   </g>

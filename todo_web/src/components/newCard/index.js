@@ -7,7 +7,7 @@ import './styles.css';
 const NewCard = ({ data }) => {
   const [newCard_title, setNewCard_Title] = useState('');
   const [newCard_tasks, setNewCard_Tasks] = useState([['', false]]);
-  const [newCard_label, setNewCard_Label] = useState('');
+  const [newCard_label, setNewCard_Label] = useState();
 
   const newCard_taskChecked = (index) => {
     let arrayTasks = [];
@@ -75,7 +75,9 @@ const NewCard = ({ data }) => {
           ))
         }
         <div className='newCard_footer'>
-          <input type='text' className='newCard_label' placeholder='Card Label' onChange={(event) => setNewCard_Label(event.target.value)} value={newCard_label} />
+          <div className='newCard_labelContainer'>
+            <input type='text' className='newCard_label' onChange={(event) => setNewCard_Label(event.target.value)} value={newCard_label} placeholder='Card Label' />
+          </div>
           <button className='newCard_createCardButton' onClick={() => newCard_addNewCard()}>Create Card</button>
         </div>
       </div>

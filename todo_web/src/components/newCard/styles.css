@@ -89,24 +89,51 @@
   align-items: center;
 }
 
-.newCard_label {
-  width: 60px;
+.newCard_labelContainer {
+  min-width: 30px;
+  max-width: 200px;
   padding: 5px;
-  border: 1px solid #f5f5f5;
-  border-radius: 5px;
-  background: transparent;
-  color: #f5f5f5;
-  font-weight: bold;
-  font-size: 11px
+  border-radius: 15px;
+  box-shadow: 1px 1px 2px #15161d;
 }
 
-.newCard_label:hover {
+.newCard_labelContainer:hover {
   background: #282a36;
   cursor: pointer;
 }
+
+.newCard_label {
+  width: 97%;
+  background: transparent;
+  border: 0;
+  color: #f5f5f5;
+  font-weight: normal;
+  font-size: 13px;
+  text-align: center;
+}
+
 .newCard_createCardButton {
-  border: 1px solid #f5f5f5;
+  width: auto;
+  height: auto;
+  margin-right: 9px;
   padding: 5px;
-  background: rgb(0, 138, 188);
-  border-radius: 5px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 2px #15161d;
+  background: transparent;
+  font-size: 13px;
+  font-weight: normal;
+}
+
+.newCard_createCardButton:hover {
+  background: transparent;
+  box-shadow: 2px 2px 3px #15161d;
+  font-size: 14px;
+  padding-bottom: 4px;
+}
+
+.newCard_createCardButton:active {
+  background: transparent;
+  box-shadow: 1px 1px 3px #15161d;
+  font-size: 13px;
+  padding-bottom: 5px;
 }

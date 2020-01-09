@@ -19,7 +19,11 @@
 }
 
 .shadows {
-  box-shadow: #111;
+  box-shadow: #15161d;
+}
+
+.border {
+  color: #282a36;
 }
 
 a:link,

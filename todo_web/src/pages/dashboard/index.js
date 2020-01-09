@@ -77,16 +77,20 @@ const Dashboard = ({ history }) => {
   return (
     <>
       <div className='dashboard_header'>
-        <button className='dashboard_menuIcon' onClick={() => setDashboard_MenuState(!dashboard_menuState)}>
-          <img src={menuIcon} alt='menuIcon' />
-        </button>
-        <img src={Logo} alt='Muly ToDo List' className='dashboard_logo' />
-        <button className='dashboard_refresh' onClick={() => { dashboard_loadCards(); }}>
-          <img src={RefreshIcon} alt='refreshIcon' className='deshboard_refreshIcon' />
-        </button>
-        <button className='dashboard_logout' onClick={() => { DashboardLogout(); }}>
-          <img src={LogoutIcon} alt='logoutIcon' className='dashboard_logoutIcon' />
-        </button>
+        <div className='dashboard_headerLeftContainer'>
+          <button className='dashboard_menuIcon' onClick={() => setDashboard_MenuState(!dashboard_menuState)}>
+            <img src={menuIcon} alt='menuIcon' />
+          </button>
+          <img src={Logo} alt='Muly ToDo List' className='dashboard_logo' />
+        </div>
+        <div className='dashboard_headerRightContainer'>
+          <button className='dashboard_refresh' onClick={() => { dashboard_loadCards(); }}>
+            <img src={RefreshIcon} alt='refreshIcon' className='deshboard_refreshIcon' />
+          </button>
+          <button className='dashboard_logout' onClick={() => { DashboardLogout(); }}>
+            <img src={LogoutIcon} alt='logoutIcon' className='dashboard_logoutIcon' />
+          </button>
+        </div>
       </div>
       <div className='dashboard_addNewCard'>
         <label type='button' htmlFor='addNewCard' onClick={() => setDashboard_AddNewCardState(!dashboard_addNewCardState)}>Add A Card</label>

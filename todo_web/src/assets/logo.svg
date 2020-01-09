@@ -25,9 +25,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="213.10806"
-     inkscape:cy="258.78892"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="142.59594"
+     inkscape:cy="320.08772"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,28 +55,38 @@
      id="layer1"
      transform="translate(0,-180)">
     <rect
-       style="fill:#282a36;fill-opacity:1;stroke:#008abc;stroke-width:1.46941209;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#008abc;stroke-width:4.57707405;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect815"
-       width="68.381058"
-       height="68.381058"
-       x="22.898657"
-       y="207.38853"
-       ry="2.0385892" />
+       width="52.164196"
+       height="52.164196"
+       x="26.463505"
+       y="215.49696"
+       ry="1.5551289" />
     <path
-       style="fill:none;fill-opacity:1;stroke:#f5f5f5;stroke-width:1.70000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.96078431"
-       d="m 29.611844,229.82083 26.326048,24.9897 89.134388,-68.55464"
+       style="fill:none;fill-opacity:1;stroke:#f5f5f5;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.96078431"
+       d="m 32.060746,236.39248 16.022278,15.20896 54.248016,-41.72298"
        id="path825"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.22222137px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#f5f5f5;fill-opacity:0.96078431;stroke:none;stroke-width:1.14958107;stroke-opacity:0.96078431"
-       x="98.286469"
+       x="93.742889"
        y="250.8815"
        id="text994"><tspan
          sodipodi:role="line"
-         x="98.286469"
+         x="93.742889"
          y="250.8815"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.22222137px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;fill:#f5f5f5;fill-opacity:0.96078431;stroke:none;stroke-width:1.14958107;stroke-opacity:0.96078431"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:28.22222137px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:justify;writing-mode:lr-tb;text-anchor:start;fill:#f5f5f5;fill-opacity:0.96078431;stroke:none;stroke-width:1.14958107;stroke-opacity:0.96078431"
          id="tspan996">Muly List</tspan></text>
-  </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot819"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:29.33333333px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'sans-serif, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:justify;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal"><flowRegion
+         id="flowRegion821"><rect
+           id="rect823"
+           width="1120.2592"
+           height="487.90369"
+           x="-121.21831"
+           y="-74.993378" /></flowRegion><flowPara
+         id="flowPara825"></flowPara></flowRoot>  </g>
 </svg>

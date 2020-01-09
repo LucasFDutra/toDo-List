@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
+// import DeleteIcon from '../../assets/deleteIcon.svg';
+// import SaveIcon from '../../assets/saveIcon.svg';
+import MenuCardIcon from '../../assets/menuCardIcon.svg';
 import './styles.css';
 
 // viriables init with card_
@@ -8,6 +11,7 @@ const Card = ({ data }) => {
   const [card_title, setCard_Title] = useState('');
   const [card_tasks, setCard_Tasks] = useState([]);
   const [card_label, setCard_Label] = useState('');
+  const [card_menuCardState, setCard_MenuCardState] = useState(false);
 
   useEffect(() => {
     let arrayTasks = [];
@@ -91,9 +95,33 @@ const Card = ({ data }) => {
         ))
       }
       <div className='card_footer'>
-        <input type='text' className='card_label' onChange={(event) => setCard_Label(event.target.value)} value={card_label} placeholder='Card Label' />
-        <button className='card_updateCardButton' onClick={() => card_updateCard()}>Save</button>
-        <button className='card_deleteCardButton' onClick={() => card_deleteCard()}>Delete Card</button>
+        <div>
+          {
+          card_label && (
+            <div className='card_labelContainer'>
+              <input type='text' className='card_label' onChange={(event) => { setCard_Label(event.target.value); }} value={card_label} size={card_label.length} />
+            </div>
+          )
+        }
+        </div>
+        <div className='card_footerButtons'>
+          {
+            card_menuCardState && (
+              <>
+                {
+                  !card_label && (
+                    <button className='card_labelButton' onClick={() => { setCard_Label(' '); }}>Add Label</button>
+                  )
+                }
+                <button className='card_deleteCardButton' onClick={() => card_deleteCard()}>Delete Card</button>
+              </>
+            )
+          }
+          <button className='card_updateCardButton' onClick={() => card_updateCard()}>Update</button>
+          <button className='card_menuCard' onClick={() => { setCard_MenuCardState(!card_menuCardState); }}>
+            <img src={MenuCardIcon} alt='menu card icon' className='card_menuCardIcon' />
+          </button>
+        </div>
       </div>
     </div>
   );
