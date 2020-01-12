@@ -109,11 +109,11 @@
   cursor: text;
 }
 
-.dashboard_menuContainer {
+.dashboard_dashboardContainer {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .dashboard_menu{
@@ -135,10 +135,10 @@
 }
 
 .dashboard_mainLabel {
-  width: 100%;
-  margin: 20px 10px 20px 0;
+  width: 95%;
+  margin: 20px 20px 20px 0px;
   padding-bottom: 5px;
-  border-bottom: 1px solid #111;
+  border-bottom: 1px solid #f5f5f5;
   font-size: large;
 }
 
@@ -166,4 +166,31 @@
 .dashboard_cardsContainer {
   width: 85%;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard_cardsPinnedLabelContainer, .dashboard_cardsUnpinnedLabelContainer {
+  width: 97%;
+  margin-top: 20px;
+  padding: 0 0 5px 10px;
+  border-bottom: 1px solid #f5f5f5;
+  color: #f5f5f5;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dashboard_cardsPinnedLabelButton, .dashboard_cardsUnpinnedLabelButton {
+  width: auto;
+  background: transparent;
+}
+
+.dashboard_cardsPinnedLabelButton:hover, .dashboard_cardsUnpinnedLabelButton:hover {
+  background: transparent;
+}
+
+.dashboard_cardPinnedLabelIcon, .dashboard_cardUnpinnedLabelIcon {
+  width: 20px;
 }

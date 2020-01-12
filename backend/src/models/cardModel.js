@@ -14,6 +14,10 @@ const cardSchema = new Schema(
       type: String,
       required: false,
     },
+    pinned: {
+      type: Boolean,
+      required: false,
+    },
     tasks: {
       type: [[String]],
       required: false,

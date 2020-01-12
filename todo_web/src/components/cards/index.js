@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
-// import DeleteIcon from '../../assets/deleteIcon.svg';
-// import SaveIcon from '../../assets/saveIcon.svg';
+import PinnedIcon from '../../assets/pinnedIcon.svg';
 import MenuCardIcon from '../../assets/menuCardIcon.svg';
+import HiddenIcon from '../../assets/hiddenIcon.svg';
+import ShowIcon from '../../assets/showIcon.svg';
 import './styles.css';
 
 // viriables init with card_
 
 const Card = ({ data }) => {
-  const [card_title, setCard_Title] = useState('');
+  const [card_title, setCard_Title] = useState(data.card.title);
+  const [card_pinned, setCard_Pinned] = useState(data.card.pinned);
   const [card_tasks, setCard_Tasks] = useState([]);
-  const [card_label, setCard_Label] = useState('');
+  const [card_label, setCard_Label] = useState(data.card.label);
+  const [card_showLabel, setCard_ShowLabel] = useState(false);
   const [card_menuCardState, setCard_MenuCardState] = useState(false);
+  const [card_hiddeCompletedItems, setCard_HiddeCompletedItems] = useState(true);
 
   useEffect(() => {
     let arrayTasks = [];
     data.card.tasks.map((task) => {
       arrayTasks = [...arrayTasks, [task[0], task[1] === 'true']];
     });
-
     setCard_Tasks(arrayTasks);
-    setCard_Title(data.card.title);
-    setCard_Label(data.card.label);
   }, []);
 
   const card_updateCard = async () => {
@@ -33,11 +34,13 @@ const Card = ({ data }) => {
       },
       data: {
         username: data.username,
-        label: card_label,
         title: card_title,
+        pinned: card_pinned,
         tasks: card_tasks,
+        label: card_label,
       },
     });
+    data.dashboard_loadCards();
   };
 
   const card_taskChecked = (index) => {
@@ -84,22 +87,50 @@ const Card = ({ data }) => {
 
   return (
     <div className='card_container'>
-      <input className='card_title' onChange={(event) => setCard_Title(event.target.value)} value={card_title} />
-      {
-        card_tasks.map((task, index) => (
-          <div className='card_task' key={index}>
-            <input className='card_taskCheck' type='checkbox' onChange={() => card_taskChecked(index)} checked={task[1]} />
-            <input className='card_taskText' type='text' onChange={(event) => card_taskText(event.target.value, index)} value={task[0]} onKeyPress={(event) => (event.key === 'Enter' ? card_addNewTask(index) : null)} />
-            <button className='card_deleteTask' onClick={() => { card_deleteTask(index); }}>x</button>
-          </div>
-        ))
-      }
+      <div className='card_headerContainer'>
+        <input className='card_title' onChange={(event) => setCard_Title(event.target.value)} value={card_title} />
+        <button className='card_pinnedCard' style={{ opacity: (card_pinned ? 1 : null) }} onClick={() => setCard_Pinned(!card_pinned)}>
+          <img src={PinnedIcon} alt='pinned icon' className='card_pinnedCardIcon' />
+        </button>
+      </div>
+      <div className='card_tasksContainer'>
+        {
+          card_tasks.map((task, index) => (
+            !task[1] ? (
+              <div className='card_task' key={index}>
+                <input className='card_taskCheck' type='checkbox' onChange={() => card_taskChecked(index)} checked={task[1]} />
+                <input autoFocus={(task[0] === '')} className='card_taskText' type='text' onChange={(event) => card_taskText(event.target.value, index)} value={task[0]} onKeyDown={(event) => (event.key === 'Enter' ? card_addNewTask(index) : ((event.key === 'Backspace' && (task[0].length === 1 || !task[0])) ? card_deleteTask(index) : null))} />
+                <button className='card_deleteTask' onClick={() => { card_deleteTask(index); }}>x</button>
+              </div>
+            ) : null
+          ))
+        }
+        <div className='card_completedItemsLabelContainer'>
+          <label htmlFor='completed itens' className='card_completedItemsLabel'>Completed Items</label>
+          <button className='card_completedItemsLabelButton' onClick={() => setCard_HiddeCompletedItems(!card_hiddeCompletedItems)}>
+            <img src={(card_hiddeCompletedItems ? ShowIcon : HiddenIcon)} alt='completed items' className='card_completedItemsLabelButtonIcon' />
+          </button>
+        </div>
+        {
+          !card_hiddeCompletedItems && (
+            card_tasks.map((task, index) => (
+              task[1] ? (
+                <div className='card_task' key={index}>
+                  <input className='card_taskCheck' type='checkbox' onChange={() => card_taskChecked(index)} checked={task[1]} />
+                  <input className='card_taskText' type='text' onChange={(event) => card_taskText(event.target.value, index)} value={task[0]} onKeyDown={(event) => ((event.key === 'Backspace' && (task[0].length === 1 || !task[0])) ? card_deleteTask(index) : null)} />
+                  <button className='card_deleteTask' onClick={() => { card_deleteTask(index); }}>x</button>
+                </div>
+              ) : null
+            ))
+          )
+        }
+      </div>
       <div className='card_footer'>
         <div>
           {
-          card_label && (
+          (card_label || card_showLabel) && (
             <div className='card_labelContainer'>
-              <input type='text' className='card_label' onChange={(event) => { setCard_Label(event.target.value); }} value={card_label} size={card_label.length} />
+              <input type='text' className='card_label' onChange={(event) => { setCard_Label(event.target.value); }} onKeyDown={(event) => ((event.key === 'Backspace' && (card_label.length === 1 || !card_label)) ? setCard_ShowLabel(false) : null)} value={card_label} size={(card_label ? card_label.length : 3)} />
             </div>
           )
         }
@@ -109,8 +140,8 @@ const Card = ({ data }) => {
             card_menuCardState && (
               <>
                 {
-                  !card_label && (
-                    <button className='card_labelButton' onClick={() => { setCard_Label(' '); }}>Add Label</button>
+                  (!card_label && !card_showLabel) && (
+                    <button className='card_labelButton' onClick={() => { setCard_ShowLabel(true); }}>Add Label</button>
                   )
                 }
                 <button className='card_deleteCardButton' onClick={() => card_deleteCard()}>Delete Card</button>

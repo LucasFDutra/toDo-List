@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
+import PinnedIcon from '../../assets/pinnedIcon.svg';
 import './styles.css';
 
 // variables init with newCard_
 
 const NewCard = ({ data }) => {
   const [newCard_title, setNewCard_Title] = useState('');
+  const [newCard_pinned, setNewCard_Pinned] = useState(false);
   const [newCard_tasks, setNewCard_Tasks] = useState([['', false]]);
-  const [newCard_label, setNewCard_Label] = useState();
+  const [newCard_label, setNewCard_Label] = useState('');
+
+  useEffect(() => {
+    console.log(newCard_tasks);
+  }, [newCard_tasks]);
 
   const newCard_taskChecked = (index) => {
     let arrayTasks = [];
@@ -50,6 +56,7 @@ const NewCard = ({ data }) => {
         username: data.username,
         label: newCard_label,
         title: newCard_title,
+        pinned: newCard_pinned,
         tasks: newCard_tasks,
       },
     });
@@ -64,12 +71,17 @@ const NewCard = ({ data }) => {
   return (
     <div tabIndex='0' className='newCard_container' onKeyDown={(event) => (event.key === 'Escape' ? newCard_exitScreen() : null)}>
       <div className='newCard_cardContainer'>
-        <input className='newCard_title' placeholder='Card Title' onChange={(event) => setNewCard_Title(event.target.value)} value={newCard_title} />
+        <div className='newCard_headerContainer'>
+          <input className='newCard_title' placeholder='Card Title' onChange={(event) => setNewCard_Title(event.target.value)} value={newCard_title} />
+          <button className='newCard_pinnedCard' style={{ opacity: (newCard_pinned ? 1 : null) }} onClick={() => setNewCard_Pinned(!newCard_pinned)}>
+            <img src={PinnedIcon} alt='pinned icon' className='card_pinnedCardIcon' />
+          </button>
+        </div>
         {
           newCard_tasks.map((task, index) => (
             <div className='newCard_task' key={index}>
               <input className='newCard_taskCheck' type='checkbox' onChange={() => newCard_taskChecked(index)} checked={task[1]} />
-              <input car className='newCard_taskText' type='text' onChange={(event) => newCard_taskText(event.target.value, index)} value={task[0]} onKeyPress={(event) => (event.key === 'Enter' ? newCard_addNewTask(index) : null)} />
+              <input autoFocus={(task[0] === '')} className='newCard_taskText' type='text' onChange={(event) => newCard_taskText(event.target.value, index)} value={task[0]} onKeyPress={(event) => (event.key === 'Enter' ? newCard_addNewTask(index) : null)} />
               <button className='newCard_deleteTask' onClick={() => { newCard_deleteTask(index); }}>x</button>
             </div>
           ))

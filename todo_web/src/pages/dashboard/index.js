@@ -7,6 +7,8 @@ import Logo from '../../assets/logo.svg';
 import LabelIcon from '../../assets/labelIcon.svg';
 import RefreshIcon from '../../assets/refreshIcon.svg';
 import LogoutIcon from '../../assets/logoutIcon.svg';
+import HiddenIcon from '../../assets/hiddenIcon.svg';
+import ShowIcon from '../../assets/showIcon.svg';
 import './styles.css';
 
 // variables init with dashboard_
@@ -17,7 +19,11 @@ const Dashboard = ({ history }) => {
   const [dashboard_addNewCardState, setDashboard_AddNewCardState] = useState(false);
   const [dashboard_menuState, setDashboard_MenuState] = useState(false);
   const [dashboard_selectedLabel, setDashboard_SelectedLabel] = useState('');
-  const [dashboard_cards, setDashboard_Cards] = useState([]);
+  const [dashboard_labels, setDashboard_Labels] = useState([]);
+  const [dashboard_cardsPinned, setDashboard_CardsPinned] = useState([]);
+  const [dashboard_cardsUnpinned, setDashboard_CardsUnpinned] = useState([]);
+  const [dashboard_hiddePinned, setDashboard_HiddePinned] = useState(false);
+  const [dashboard_hiddeUnpinned, setDashboard_HiddeUnpinned] = useState(false);
 
   useEffect(() => {
     dashboard_loadCards();
@@ -33,7 +39,20 @@ const Dashboard = ({ history }) => {
     if (response.data === 404) {
       window.alert('access denied');
     } else {
-      setDashboard_Cards(response.data);
+      let arrayLabels = [];
+      let arrayCardsPinned = [];
+      let arrayCardsUnpinned = [];
+      response.data.map((card) => {
+        arrayLabels = [...arrayLabels, card.label];
+        if (card.pinned) {
+          arrayCardsPinned = [...arrayCardsPinned, card];
+        } else {
+          arrayCardsUnpinned = [...arrayCardsUnpinned, card];
+        }
+      });
+      setDashboard_CardsPinned(arrayCardsPinned);
+      setDashboard_CardsUnpinned(arrayCardsUnpinned);
+      setDashboard_Labels(arrayLabels);
     }
   };
 
@@ -53,8 +72,8 @@ const Dashboard = ({ history }) => {
 
   const Menu = () => {
     let arrayLabels = [];
-    dashboard_cards.map((card) => (
-      card.label !== '' ? arrayLabels = [...arrayLabels, card.label] : false
+    dashboard_labels.map((label) => (
+      label !== '' ? arrayLabels = [...arrayLabels, label] : false
     ));
     arrayLabels = [...new Set(arrayLabels)];
 
@@ -109,30 +128,73 @@ const Dashboard = ({ history }) => {
         )
       }
 
-      <div className='dashboard_menuContainer'>
-        {
+      <div className='dashboard_dashboardContainer'>
+
+        <div className='dashboard_menuContainer'>
+          {
           dashboard_menuState && (
             <Menu />
           )
         }
+        </div>
         <div className='dashboard_cardsContainer'>
+          <div className='dashboard_cardsPinnedLabelContainer'>
+            <label className='dashboard_cardsPinnedLabel' htmlFor='pinned'>Pinned</label>
+            <button className='dashboard_cardsPinnedLabelButton' onClick={() => setDashboard_HiddePinned(!dashboard_hiddePinned)}>
+              <img src={(dashboard_hiddePinned ? ShowIcon : HiddenIcon)} alt='hidden pinned icon' className='dashboard_cardPinnedLabelIcon' />
+            </button>
+          </div>
           {
-            dashboard_cards.map((card) => (
-              <Card
-                key={card._id}
-                data={
+            !dashboard_hiddePinned && (
+              <div className='dashboard_cardsPinned'>
                 {
-                  card,
-                  username: dashboard_username,
-                  password: dashboard_password,
-                  dashboard_loadCards,
+                dashboard_cardsPinned.map((card) => (
+                  <Card
+                    key={card._id}
+                    data={
+                    {
+                      card,
+                      username: dashboard_username,
+                      password: dashboard_password,
+                      dashboard_loadCards,
+                    }
+                  }
+                  />
+                ))
                 }
-              }
-              />
-            ))
-            }
+              </div>
+            )
+          }
+          <div className='dashboard_cardsUnpinnedLabelContainer'>
+            <label className='dashboard_cardsUnpinnedLabel' htmlFor='unpinned'>Others</label>
+            <button className='dashboard_cardsUnpinnedLabelButton' onClick={() => setDashboard_HiddeUnpinned(!dashboard_hiddeUnpinned)}>
+              <img src={(dashboard_hiddeUnpinned ? ShowIcon : HiddenIcon)} alt='hidden pinned icon' className='dashboard_cardUnpinnedLabelIcon' />
+            </button>
+          </div>
+          {
+            !dashboard_hiddeUnpinned && (
+            <div className='dashboard_cards_Unpinned'>
+              {
+                dashboard_cardsUnpinned.map((card) => (
+                  <Card
+                    key={card._id}
+                    data={
+                    {
+                      card,
+                      username: dashboard_username,
+                      password: dashboard_password,
+                      dashboard_loadCards,
+                    }
+                  }
+                  />
+                ))
+                }
+            </div>
+            )
+          }
         </div>
       </div>
+
     </>
   );
 };

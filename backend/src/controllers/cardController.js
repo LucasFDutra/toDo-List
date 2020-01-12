@@ -23,6 +23,7 @@ module.exports = {
       let cards = '';
       if (label !== '') {
         cards = await cardModel.find({ username, label });
+        console.log(cards);
       } else {
         cards = await cardModel.find({ username });
       }
